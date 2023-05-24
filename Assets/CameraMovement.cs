@@ -9,7 +9,7 @@ public class CameraMovement : MonoBehaviour
     void Update()
     {
         float _mouseX = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
-        float _mouseOffset = Camera.main.transform.position.x - _mouseX;
+        float _mouseOffset = transform.position.x - _mouseX;
 
         if (Mathf.Abs(_mouseOffset) >= 5.4f && canTurn)
         {
