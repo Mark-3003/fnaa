@@ -7,7 +7,11 @@ public class GameManager : MonoBehaviour
     public int currentNight;
     public int currentDisplayedTime;
 
+    public AudioSource audioSource;
+    public AudioClip[] soundEffects;
+
     public ADHI adhi;
+    public BEMU bemu;
 
     public RoomDetails mainStartArea;
     public RoomDetails generalArea1;
@@ -46,6 +50,9 @@ public class GameManager : MonoBehaviour
         RoomDetails _newRoom = returnRoom(_room);
 
         _newRoom.enemies[_enem] = _progression;
+
+        audioSource.clip = soundEffects[0];
+        audioSource.Play();
     }
     
     [System.Serializable]

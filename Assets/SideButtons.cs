@@ -9,7 +9,7 @@ public class SideButtons : MonoBehaviour
     [Header("Colours")]
     public Color onColor;
     public Color offColor;
-    void OnMouseDown()
+    public void ButtonTrigger()
     {
         action.Toggle();
         if (action.toggleStatus)

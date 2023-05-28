@@ -23,8 +23,9 @@ public class ADHI : MonoBehaviour
         if (DEBUGbutton)
         {
             DEBUGbutton = false;
-            gm.moveEnemyTo("ADHI", "mainStartArea", 1);
+
             currentRoom = "mainStartArea";
+            gm.moveEnemyTo("ADHI", currentRoom, 1);
             currentProgression = 1;
         }
         if(Time.realtimeSinceStartup >= timer)
@@ -49,22 +50,22 @@ public class ADHI : MonoBehaviour
 
         if(currentRoom == "mainStartArea")
         {
-            gm.moveEnemyTo("ADHI", "generalArea1", 1);
             currentRoom = "generalArea1";
+            gm.moveEnemyTo("ADHI", currentRoom, 1);
             currentProgression = 1;
         }
         else if (currentRoom == "generalArea1")
         {
-            gm.moveEnemyTo("ADHI", "mainHall1", 1);
             currentRoom = "mainHall1";
+            gm.moveEnemyTo("ADHI", currentRoom, 1);
             currentProgression = 1;
         }
         else if (currentRoom == "mainHall1")
         {
             if(currentProgression == 1)
             {
-                gm.moveEnemyTo("ADHI", "mainHall1", 2);
                 currentRoom = "mainHall1";
+                gm.moveEnemyTo("ADHI", currentRoom, 2);
                 currentProgression = 2;
             }
             else
@@ -72,14 +73,14 @@ public class ADHI : MonoBehaviour
                 _chance = Random.Range(1, 10);
                 if (_chance <= 5)
                 {
-                    gm.moveEnemyTo("ADHI", "office", 1);
                     currentRoom = "office";
+                    gm.moveEnemyTo("ADHI", currentRoom, 1);
                     currentProgression = 1;
                 }
                 else
                 {
-                    gm.moveEnemyTo("ADHI", "sideHall", 1);
                     currentRoom = "sideHall";
+                    gm.moveEnemyTo("ADHI", currentRoom, 1);
                     currentProgression = 1;
                 }
             }
@@ -88,8 +89,8 @@ public class ADHI : MonoBehaviour
         {
             if (currentProgression == 1)
             {
-                gm.moveEnemyTo("ADHI", "sideHall", 2);
                 currentRoom = "sideHall";
+                gm.moveEnemyTo("ADHI", currentRoom, 2);
                 currentProgression = 2;
             }
             else if(currentProgression == 2)
@@ -97,44 +98,44 @@ public class ADHI : MonoBehaviour
                 _chance = Random.Range(1, 10);
                 if(_chance <= 5)
                 {
-                    gm.moveEnemyTo("ADHI", "storageRoom", 1);
                     currentRoom = "storageRoom";
+                    gm.moveEnemyTo("ADHI", currentRoom, 1);
                     currentProgression = 1;
                 }
                 else
                 {
-                    gm.moveEnemyTo("ADHI", "sideHall", 3);
                     currentRoom = "sideHall";
+                    gm.moveEnemyTo("ADHI", currentRoom, 3);
                     currentProgression = 3;
                 }
             }
             else
             {
                 // GAME OVER
-                gm.moveEnemyTo("ADHI", "mainStartArea", 1);
                 currentRoom = "mainStartArea";
+                gm.moveEnemyTo("ADHI", currentRoom, 1);
                 currentProgression = 1;
             }
         }
         else if (currentRoom == "storageRoom")
         {
-            gm.moveEnemyTo("ADHI", "sideHall", 2);
             currentRoom = "sideHall";
+            gm.moveEnemyTo("ADHI", currentRoom, 2);
             currentProgression = 2;
         }
         else if (currentRoom == "office")
         {
             if(currentProgression == 1)
             {
-                gm.moveEnemyTo("ADHI", "office", 2);
                 currentRoom = "office";
+                gm.moveEnemyTo("ADHI", currentRoom, 2);
                 currentProgression = 2;
             }
             else
             {
                 // GAME OVER
-                gm.moveEnemyTo("ADHI", "mainStartArea", 1);
                 currentRoom = "mainStartArea";
+                gm.moveEnemyTo("ADHI", currentRoom, 1);
                 currentProgression = 1;
             }
         }
@@ -171,8 +172,8 @@ public class ADHI : MonoBehaviour
                 AIlevel = 20;
                 break;
         }
-        gm.moveEnemyTo("ADHI", "mainStartArea", 1);
         currentRoom = "mainStartArea";
+        gm.moveEnemyTo("ADHI", currentRoom, 1);
     }
     public void changeAILevel(int _change)
     {

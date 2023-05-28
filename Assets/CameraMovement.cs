@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
+    public Animator flipCam;
+
+    public bool cameraFliped;
     public bool canTurn;
     public float turnSpeed = 1;
     public float moveLimit;
     public GameObject debugCeiling;
+
+    public LayerMask mouseRayMask;
 
     GameManager gm;
     bool lookingUp;
@@ -17,14 +22,20 @@ public class CameraMovement : MonoBehaviour
     }
     void Update()
     {
+        cameraFliped = flipCam.GetBool("flipedUp");
+
+        if(Input.GetMouseButtonDown(0))
+            sendMouseRay();
+
         float _mouseX = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
         float _mouseOffsetX = transform.position.x - _mouseX;
 
-        if (Mathf.Abs(_mouseOffsetX) >= 5.4f && canTurn)
+        if (Mathf.Abs(_mouseOffsetX) >= 5.4f && canTurn && !cameraFliped)
         {
             float _Movementdirection = _mouseOffsetX / Mathf.Abs(_mouseOffsetX);
+            float _mouseDelta = (Mathf.Abs(_mouseOffsetX) - 5.4f) / 2;
 
-            transform.position = new Vector3(Mathf.Clamp(transform.position.x - turnSpeed * _Movementdirection * Time.deltaTime, -moveLimit, moveLimit), 0, -10);
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x - Mathf.Clamp(turnSpeed * _mouseDelta, 0, turnSpeed * 1.5f) * _Movementdirection * Time.deltaTime, -moveLimit, moveLimit), 0, -10);
         }
         // DEBUG EXIT
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -46,6 +57,25 @@ public class CameraMovement : MonoBehaviour
             CheckCeiling(false);
         }
     }
+    void sendMouseRay()
+    {
+        //Debug.Log("Mouse click detected");
+
+        Vector3 _mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        _mousePos.z = -10f;
+
+        RaycastHit hit;
+        Physics.Raycast(_mousePos, Vector3.forward, out hit, Mathf.Infinity, mouseRayMask);
+
+        if(hit.collider != null)
+        {
+            if (hit.collider.GetComponent<SideButtons>())
+            {
+                hit.collider.GetComponent<SideButtons>().ButtonTrigger();
+            }
+            Debug.Log("HIT: " + hit.collider.name);
+        }
+    }
     void CheckCeiling(bool _lookUp)
     {
         if (_lookUp)
@@ -58,7 +88,7 @@ public class CameraMovement : MonoBehaviour
         else
         {
             gm.PlayerLookingAt("forward");
-            GetComponent<FlipCamera>().cameraUseDelay(0.7f);
+            GetComponent<FlipCamera>().cameraUseDelay(0.5f);
             debugCeiling.SetActive(false);
             lookingUp = false;
         }
