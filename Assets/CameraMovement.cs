@@ -11,6 +11,7 @@ public class CameraMovement : MonoBehaviour
     public float turnSpeed = 1;
     public float moveLimit;
     public GameObject debugCeiling;
+    public GameObject upperTrigger;
 
     public LayerMask mouseRayMask;
 
@@ -69,9 +70,9 @@ public class CameraMovement : MonoBehaviour
 
         if(hit.collider != null)
         {
-            if (hit.collider.GetComponent<SideButtons>())
+            if (hit.collider.GetComponent<CameraButton>())
             {
-                hit.collider.GetComponent<SideButtons>().ButtonTrigger();
+                hit.collider.GetComponent<CameraButton>().ClickedOn();
             }
             Debug.Log("HIT: " + hit.collider.name);
         }
@@ -83,6 +84,7 @@ public class CameraMovement : MonoBehaviour
             gm.PlayerLookingAt("ceiling");
             GetComponent<FlipCamera>().UpdateCameraState(true);
             debugCeiling.SetActive(true);
+            upperTrigger.SetActive(false);
             lookingUp = true;
         }
         else
@@ -90,6 +92,7 @@ public class CameraMovement : MonoBehaviour
             gm.PlayerLookingAt("forward");
             GetComponent<FlipCamera>().cameraUseDelay(0.5f);
             debugCeiling.SetActive(false);
+            upperTrigger.SetActive(true);
             lookingUp = false;
         }
     }

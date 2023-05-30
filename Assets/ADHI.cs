@@ -36,6 +36,7 @@ public class ADHI : MonoBehaviour
     }
     void moveChance()
     {
+        Random.InitState(System.DateTime.Now.Millisecond);
         int _randomNumber = Random.Range(1, 20);
 
         if(_randomNumber <= AIlevel)
@@ -45,7 +46,6 @@ public class ADHI : MonoBehaviour
     }
     void move()
     {
-        Random.InitState(System.DateTime.Now.Millisecond);
         int _chance;
 
         if(currentRoom == "mainStartArea")

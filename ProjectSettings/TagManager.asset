@@ -44,9 +44,3 @@ TagManager:
   - name: CameraScreen
     uniqueID: 1449134943
     locked: 0
-  - name: Static
-    uniqueID: 4241320021
-    locked: 0
-  - name: UnMasked
-    uniqueID: 2713807845
-    locked: 0

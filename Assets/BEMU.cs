@@ -56,9 +56,6 @@ public class BEMU : MonoBehaviour
     }
     void move()
     {
-        Random.InitState(System.DateTime.Now.Millisecond);
-        int _chance;
-
         if (currentRoom == "sneakstersStart")
         {
             if (currentProgression == 1)
@@ -116,6 +113,35 @@ public class BEMU : MonoBehaviour
                 gm.moveEnemyTo("BEMU", currentRoom, currentProgression);
                 AIlevel += 10;
                 dash = true;
+            }
+        }
+        else if(currentRoom == "mainHall1")
+        {
+            if(currentProgression == 1)
+            {
+                currentRoom = "mainHall1";
+                currentProgression = 2;
+                gm.moveEnemyTo("BEMU", currentRoom, currentProgression);
+            }
+            else
+            {
+                currentRoom = "office";
+                currentProgression = 1;
+                gm.moveEnemyTo("BEMU", currentRoom, currentProgression);
+            }
+        }
+        else if(currentRoom == "office")
+        {
+            if (currentProgression == 1)
+            {
+                currentRoom = "office";
+                currentProgression = 2;
+                gm.moveEnemyTo("BEMU", currentRoom, currentProgression);
+            }
+            else
+            {
+                // GAME OVER
+                Restart();
             }
         }
     }

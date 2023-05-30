@@ -10,9 +10,25 @@ public class GameManager : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip[] soundEffects;
 
+    [Header("Enemies")]
     public ADHI adhi;
     public BEMU bemu;
 
+    [Header("CameraButtons")]
+    public CameraButton mainStartAreaButton;
+    public CameraButton generalArea1Button;
+    public CameraButton generatorButton;
+    public CameraButton sneakstersStartButton;
+    public CameraButton mainHall1Button;
+    public CameraButton mainHall2Button;
+    public CameraButton outsideButton;
+    public CameraButton sideHallButton;
+    public CameraButton storageRoomButton;
+    public CameraButton officeButton;
+    public CameraButton theVoidButton;
+    public CameraButton currentCameraButton;
+
+    [Header("Rooms")]
     public RoomDetails mainStartArea;
     public RoomDetails generalArea1;
     public RoomDetails generator;
@@ -36,6 +52,8 @@ public class GameManager : MonoBehaviour
     public void moveEnemyTo(string _character, string _room, int _progression)
     {
         int _enem = returnCharacterNumber(_character);
+
+        Debug.Log(_character + ". == " + _enem);
 
         mainStartArea.enemies[_enem] = 0;
         generalArea1.enemies[_enem] = 0;
@@ -113,6 +131,9 @@ public class GameManager : MonoBehaviour
     }
     private void Awake()
     {
+        currentCameraButton = mainHall2Button;
+        currentCameraButton.BootUp();
+
         mainStartArea.enemies = new int[6];
         generalArea1.enemies = new int[6];
         generator.enemies = new int[6];
@@ -123,6 +144,11 @@ public class GameManager : MonoBehaviour
         storageRoom.enemies = new int[6];
         office.enemies = new int[6];
         theVoid.enemies = new int[6];
+    }
+    public void setCurrentRoom(CameraButton _button)
+    {
+        currentCameraButton.Restart();
+        currentCameraButton = _button;
     }
 
 }
