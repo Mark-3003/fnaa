@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     public RoomDetails generator;
     public RoomDetails sneakstersStart;
     public RoomDetails mainHall1;
+    public RoomDetails mainHall2;
     public RoomDetails outside;
     public RoomDetails sideHall;
     public RoomDetails storageRoom;
@@ -117,6 +118,8 @@ public class GameManager : MonoBehaviour
                 return sneakstersStart;
             case "mainHall1":
                 return mainHall1;
+            case "mainHall2":
+                return mainHall2;
             case "outside":
                 return outside;
             case "sideHall":
@@ -128,6 +131,13 @@ public class GameManager : MonoBehaviour
             default:
                 return theVoid;
         }
+    }
+    public int returnCharacter(string _room, string _character)
+    {
+        RoomDetails _newRoom = returnRoom(_room);
+        int _char = returnCharacterNumber(_character);
+
+        return _newRoom.enemies[_char];
     }
     private void Awake()
     {

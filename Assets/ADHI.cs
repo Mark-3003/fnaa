@@ -62,27 +62,24 @@ public class ADHI : MonoBehaviour
         }
         else if (currentRoom == "mainHall1")
         {
-            if(currentProgression == 1)
+            currentRoom = "mainHall1";
+            gm.moveEnemyTo("ADHI", currentRoom, 2);
+            currentProgression = 2;
+        }
+        else if(currentRoom == "mainHall2")
+        {
+            _chance = Random.Range(1, 10);
+            if (_chance <= 5)
             {
-                currentRoom = "mainHall1";
-                gm.moveEnemyTo("ADHI", currentRoom, 2);
-                currentProgression = 2;
+                currentRoom = "office";
+                gm.moveEnemyTo("ADHI", currentRoom, 1);
+                currentProgression = 1;
             }
             else
             {
-                _chance = Random.Range(1, 10);
-                if (_chance <= 5)
-                {
-                    currentRoom = "office";
-                    gm.moveEnemyTo("ADHI", currentRoom, 1);
-                    currentProgression = 1;
-                }
-                else
-                {
-                    currentRoom = "sideHall";
-                    gm.moveEnemyTo("ADHI", currentRoom, 1);
-                    currentProgression = 1;
-                }
+                currentRoom = "sideHall";
+                gm.moveEnemyTo("ADHI", currentRoom, 1);
+                currentProgression = 1;
             }
         }
         else if (currentRoom == "sideHall")
