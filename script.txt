@@ -1,0 +1,5 @@
+(Animated start up with warning)
+- Title Menu [New Game, Continue, Credits]
+	     if you wait too long the title screen gets darker and scarier
+
+
